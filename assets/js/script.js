@@ -1,9 +1,11 @@
 //1. Implementar el Patrón Módulo mediante IIFE
 const showVideo = (() => {
-    let show = (url, idIframe) => document.getElementById(idIframe).setAttribute("src", url);
+    let show = (url, idIframe) => {
+        document.getElementById(idIframe).setAttribute("src", url);
+    };
     return{
         watchVideo: (url, idIframe) => show(url, idIframe)
-    }    
+    };
 })();
 
 //2. Establecer una clase padre denominada Multimedia
@@ -12,14 +14,14 @@ class Multimedia{
         let _url = url;
         this.getUrl = () => _url;
         this.setUrl = (new_url) => _url = new_url;
-    }
+    };
     get obtainingUrl(){
         return this.getUrl();
-    }
+    };
     setInicio = () => {
         return "Este método es para realizar un cambio en la URL del video";
-    }
-}
+    };
+};
 
 //3. Crear una clase “Reproductor”, siendo hija de la clase padre Multimedia
 class Reproductor extends Multimedia{
@@ -28,17 +30,17 @@ class Reproductor extends Multimedia{
     let _id = id;
     this.getId = () => _id;
     this.setId = (new_id) => this._id = new_id;
-    }
+    };
     get obtainingId(){
         return this.getId();
-    }
+    };
     playMultimedia = () => {
         showVideo.watchVideo(this.obtainingUrl, this.obtainingId);
-    }
+    };
     setInicio = (time) => {
         document.getElementById(this.obtainingId).setAttribute('src', this.obtainingUrl+`?start=${time}`);
-    }
-}
+    };
+};
 
 // 4. Instanciar la clase hija pasando como argumento la URL y el id para cada etiqueta
 // iframe, por lo que se deben crear tres instancias, una para música, otra para película
